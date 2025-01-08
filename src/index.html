@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tauri App</title>
+</head>
+
+<body class="overflow-y-hidden">
+  <div class="flex h-full w-full">
+    <!--
+    <div id="sidebar" class="grid h-full w-[270px] bg-[#100f0f] justify-center">
+      <div>
+        <div id="home-page" class="flex space-x-1 items-center">
+          <img class="w-[70px]" src="./assets/icon.png" />
+          <p class="text-[20px] font-roboto-bold">
+            Musify
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <button name="page-buttons" id="0-page"
+            class="flex items-center rounded-sm bg-[#191718] w-[180px] h-[40px] justify-center duration-200 hover:border-t-[#35d1ff]  border-t-2">
+            <p>Home</p>
+          </button>
+
+          <button name="page-buttons" id="1-page"
+            class="flex items-center rounded-sm bg-[#191718] w-[180px] h-[40px] justify-center duration-200 hover:border-t-[#35d1ff]  border-t-2">
+            <p>Download Music</p>
+          </button>
+        </div>
+      </div>
+    </div>
+  -->
+
+    <!--Home page-->
+    <div name="page" id="page-0" class="flex w-full h-full">
+      <main class="w-full">
+        <div class="ml-4">
+          <div class="flex space-x-2 items-center">
+            <p class="text-[25px] font-roboto-bold">Your library</p>
+          </div>
+          <div class="flex space-x-4 overflow-x-auto items-center">
+            <div class="flex" id="artists">
+            </div>
+            <button id="import-music-button" class="rounded-full p-3 duration-200 hover:bg-[#191718]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" fill="currentColor"
+                class="bi bi-plus-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                <path
+                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="ml-4">
+          <div class="flex space-x-2 items-center">
+            <p class="text-[25px] font-roboto-bold">Musics</p>
+          </div>
+
+          <div id="musics" class="h-[550px] space-y-1 overflow-y-scroll">
+
+          </div>
+      </main>
+    </div>
+
+    <!--Download page--
+    <div name="page" id="page-1"
+      class="absolute left-1/2 transform -translate-x-1/2 grid justify-center mt-4 space-y-4">
+      <div class="flex space-x-2 relative -left-10">
+        <button class="flex space-x-2 rounded-md w-[40px] bg-[#2e2e2e] h-[40px] items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+            class="bi bi-box-arrow-in-down" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1z" />
+            <path fill-rule="evenodd"
+              d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
+          </svg>
+        </button>
+
+        <div class="grid rounded-lg w-[350px] h-[40px] bg-[#2e2e2e] items-center space-x-6">
+          <div id="youtube-input-url" class="flex w-[350px] h-[40px] rounded-md">
+            <input type="text" id="link-youtube-seach"
+              class="appearance-none w-[320px] grid items-center text-center bg-transparent outline-none"
+              placeholder="https://youtube.com.br...." />
+            <svg id="button-link-youtube-seach" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+              fill="currentColor" class="rounded-full duration-200 hover:bg-[#414141] p-2" viewBox="0 0 16 16">
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+            </svg>
+          </div>
+          <p id="msg-err" class="absolute hidden -bottom-6"></p>
+        </div>
+      </div>
+      <div id="items">
+
+      </div>
+    </div>
+  </div>
+-->
+    <div id="player" class="flex absolute w-full h-[70px] bg-[#1d1c1c] bottom-0 items-center">
+      <div class="items-center flex">
+        <img id="atual-music-icon" class="p-2 w-[60px]" src="./assets/icon.png" />
+        <div>
+          <p id="atual-music-name">None</p>
+          <p id="atual-music-artist" class="text-[#757575]">Empty</p>
+        </div>
+      </div>
+      <div class="absolute left-[25%] grid justify-items-center w-[50%]">
+        <div class="flex">
+          <svg id="prev-track-global" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+            class="bi bi-skip-start-fill" viewBox="0 0 16 16">
+            <path
+              d="M4 4a.5.5 0 0 1 1 0v3.248l6.267-3.636c.54-.313 1.232.066 1.232.696v7.384c0 .63-.692 1.01-1.232.697L5 8.753V12a.5.5 0 0 1-1 0z" />
+          </svg>
+          <div id="play-or-pause-global">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-play-fill"
+              viewBox="0 0 16 16">
+              <path
+                d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393" />
+            </svg>
+          </div>
+          <svg id="next-track-global" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+            class="bi bi-skip-end-fill" viewBox="0 0 16 16">
+            <path
+              d="M12.5 4a.5.5 0 0 0-1 0v3.248L5.233 3.612C4.693 3.3 4 3.678 4 4.308v7.384c0 .63.692 1.01 1.233.697L11.5 8.753V12a.5.5 0 0 0 1 0z" />
+          </svg>
+        </div>
+        <input type="range" min="1" max="100" value="1"
+          class=" appearance-none  slider w-full bg-[#35d1ff] h-[10px] rounded-full bg-opacity-50" id="time-music">
+      </div>
+
+      <div class="absolute left-[90%] flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+          class="bi bi-volume-down-fill" viewBox="0 0 16 16">
+          <path
+            d="M9 4a.5.5 0 0 0-.812-.39L5.825 5.5H3.5A.5.5 0 0 0 3 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 9 12zm3.025 4a4.5 4.5 0 0 1-1.318 3.182L10 10.475A3.5 3.5 0 0 0 11.025 8 3.5 3.5 0 0 0 10 5.525l.707-.707A4.5 4.5 0 0 1 12.025 8" />
+        </svg>
+        <input type="range" min="0" max="1" step="0.01" value="1"
+          class="appearance-none slider w-full bg-white h-[6px] rounded-full bg-opacity-50" id="volume-change">
+      </div>
+
+
+    </div>
+    <script src="/scripts/utils.js"></script>
+    <script src="/scripts/download-music.js"></script>
+    <script src="/scripts/musics-controls.js"></script>
+
+    <script src="/main.js"></script>
+</body>
+
+</html>
